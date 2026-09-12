@@ -17,303 +17,82 @@
       --text-white: #ffffff;
       --text-gray: #94a3b8;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-black);
-      color: var(--text-white);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-black); color: var(--text-white); min-height: 100vh; display: flex; flex-direction: column; }
+    
     /* Navbar */
-    header {
-      background: rgba(5, 8, 13, 0.9);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border-color);
-      padding: 0.9rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    header { background: rgba(5, 8, 13, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); padding: 0.9rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-icon { width: 36px; height: 36px; background: rgba(56, 189, 248, 0.15); border: 1px solid var(--diamond-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .brand-text { font-size: 1.4rem; font-weight: 800; color: var(--text-white); }
+    .brand-text span { color: var(--diamond-blue); }
+    .nav-menu { display: flex; gap: 1.4rem; }
+    .nav-menu a { color: var(--text-gray); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--text-white); }
+    .play-btn { background: #000; border: 1px solid #334155; padding: 6px 14px; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-decoration: none; color: #fff; }
+    .play-text { display: flex; flex-direction: column; font-size: 0.8rem; font-weight: 800; }
+    .play-text .sub { font-size: 0.55rem; color: #94a3b8; }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    /* Hero & Stats */
+    .hero { text-align: center; max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 1.5rem; }
+    .pill-badge { display: inline-flex; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--diamond-blue-bright); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; margin-bottom: 1rem; }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 0.8rem; }
+    .hero h1 span { color: var(--diamond-blue-bright); }
+    .hero p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .stats-row { display: flex; justify-content: center; gap: 3rem; }
+    .stat-box h3 { font-size: 1.6rem; color: var(--diamond-blue-bright); font-weight: 900; }
+    .stat-box p { font-size: 0.68rem; font-weight: 800; color: #64748b; }
 
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid var(--diamond-blue);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
+    /* Filter Bar */
+    .filter-bar-container { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .filter-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { background: #090e17; border: 1px solid var(--border-color); color: var(--text-gray); padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .filter-btn:hover, .filter-btn.active { background: rgba(56, 189, 248, 0.15); border-color: var(--diamond-blue); color: var(--diamond-blue-bright); }
+    .search-box { display: flex; background: #090e17; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; width: 260px; }
+    .search-box input { background: transparent; border: none; padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none; width: 100%; }
+    .search-box button { background: var(--diamond-blue); border: none; padding: 8px 12px; cursor: pointer; font-weight: bold; }
+    .page-info { color: var(--text-gray); font-size: 0.82rem; text-align: right; }
 
-    .brand-text {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--text-white);
-    }
+    /* Main Content */
+    .main-wrapper { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 4rem; display: flex; gap: 2rem; width: 100%; }
+    .sidebar { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1.2rem; }
+    .sidebar-block { background: #090e17; border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; }
+    .sidebar-title { font-size: 0.72rem; font-weight: 800; color: #64748b; margin-bottom: 0.8rem; text-transform: uppercase; }
+    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .sidebar-list a { color: var(--text-gray); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
+    .sidebar-list a:hover { color: var(--diamond-blue-bright); }
+    .sort-select { width: 100%; background: #05080d; border: 1px solid var(--border-color); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 0.82rem; }
 
-    .brand-text span {
-      color: var(--diamond-blue);
-    }
+    .content-area { flex-grow: 1; }
+    .section-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; }
+    .shaders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
 
-    .nav-menu {
-      display: flex;
-      gap: 1.4rem;
-      align-items: center;
-    }
+    /* Cards */
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
+    .card:hover { transform: translateY(-3px); border-color: var(--diamond-blue); }
+    .card-img-wrap { position: relative; height: 130px; background: #111827; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .badge-shaders { position: absolute; top: 6px; left: 6px; background: rgba(245, 158, 11, 0.9); color: #000; font-size: 0.58rem; font-weight: 900; padding: 2px 5px; border-radius: 4px; }
+    .card-body { padding: 0.9rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .card-title { font-size: 0.9rem; font-weight: 800; margin-bottom: 0.3rem; line-height: 1.2; }
+    .card-desc { font-size: 0.72rem; color: var(--text-gray); line-height: 1.3; margin-bottom: 0.6rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-meta { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 6px; padding: 5px 7px; margin-bottom: 0.6rem; }
+    .card-meta p { font-size: 0.68rem; color: var(--diamond-blue-bright); font-weight: 700; }
+    .card-footer { display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 0.5rem; font-size: 0.7rem; color: #64748b; font-weight: 700; }
+    .downloads { color: var(--diamond-blue-bright); font-weight: 800; }
 
-    .nav-menu a {
-      color: var(--text-gray);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-
-    .nav-menu a:hover, .nav-menu a.active {
-      color: var(--text-white);
-    }
-
-    /* Play Button */
-    .play-btn {
-      background: #000;
-      border: 1px solid #334155;
-      padding: 6px 14px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #fff;
-      transition: border-color 0.2s;
-    }
-
-    .play-btn:hover {
-      border-color: var(--diamond-blue);
-    }
-
-    .play-icon {
-      width: 14px;
-      height: 14px;
-    }
-
-    .play-text {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .play-text .sub {
-      font-size: 0.55rem;
-      color: #94a3b8;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .play-text .main {
-      font-size: 0.8rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      padding: 5rem 1.5rem 3rem;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      z-index: 2;
-    }
-
-    .pill-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--diamond-blue-bright);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      margin-bottom: 2rem;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 1.2rem;
-      color: var(--text-white);
-    }
-
-    .hero h1 span {
-      color: var(--diamond-blue-bright);
-      display: block;
-    }
-
-    .hero p {
-      color: var(--text-gray);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      max-width: 750px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-btn-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 4rem;
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      max-width: 850px;
-      margin: 0 auto;
-      padding-top: 1rem;
-    }
-
-    .stat-item h3 {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--diamond-blue-bright);
-      margin-bottom: 0.2rem;
-    }
-
-    .stat-item p {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #64748b;
-      letter-spacing: 0.5px;
-    }
-
-    /* Content Section */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
-
-    .section-header {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.8rem;
-    }
-
-    .shaders-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--diamond-blue);
-    }
-
-    .card-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    .card-body h4 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-body p {
-      color: var(--text-gray);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 1.2rem;
-    }
-
-    .card-btn {
-      display: block;
-      width: 100%;
-      background: var(--diamond-blue);
-      color: #000;
-      text-align: center;
-      padding: 0.8rem;
-      border-radius: 10px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .card-btn:hover {
-      opacity: 0.9;
-    }
-
-    footer {
-      text-align: center;
-      padding: 3rem;
-      color: #475569;
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border-color);
-      margin-top: 4rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-menu { display: none; }
-      .hero h1 { font-size: 2.2rem; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    }
+    footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.8rem; border-top: 1px solid var(--border-color); margin-top: auto; }
+    @media (max-width: 900px) { .main-wrapper { flex-direction: column; } .sidebar { width: 100%; } .nav-menu { display: none; } }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
   <header>
     <a href="#" class="brand">
       <div class="brand-icon">🗡️</div>
       <div class="brand-text"><span>Shaders</span>ForMCPE</div>
     </a>
-
     <nav class="nav-menu">
       <a href="#" class="active">Home</a>
       <a href="#">Shaders</a>
@@ -324,96 +103,539 @@
       <a href="#">Shout-Outs</a>
       <a href="#">Saved</a>
     </nav>
-
     <a href="#" class="play-btn">
-      <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15C4.34,1.91 4.95,2 5.38,2.38L18.88,11.38C19.27,11.64 19.5,12.07 19.5,12.5C19.5,12.93 19.27,13.36 18.88,13.62L5.38,22.62C4.95,23 4.34,23.09 3.84,22.85C3.34,22.61 3,22.09 3,21.5V20.5Z" fill="#38bdf8"/></svg>
       <div class="play-text">
         <span class="sub">GET IT ON</span>
-        <span class="main">Google Play</span>
+        <span>Google Play</span>
       </div>
     </a>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <div class="pill-badge">
-      ⚡ HAND-TESTED & FPS-OPTIMIZED MINECRAFT HUB
-    </div>
-
-    <h1>
-      Discover Next-Level
-      <span>Minecraft Shaders & Mods</span>
-    </h1>
-
-    <p>
-      Welcome to ShadersForMCPE! Our curation team manually tests every shader, resource pack, and mod on this page to ensure full compatibility with Minecraft 1.21+ and maximum frame-rate optimization. Explore our hand-picked collection below.
-    </p>
-
-    <div class="hero-btn-wrap">
-      <a href="#" class="play-btn" style="padding: 10px 22px;">
-        <svg class="play-icon" style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15C4.34,1.91 4.95,2 5.38,2.38L18.88,11.38C19.27,11.64 19.5,12.07 19.5,12.5C19.5,12.93 19.27,13.36 18.88,13.62L5.38,22.62C4.95,23 4.34,23.09 3.84,22.85C3.34,22.61 3,22.09 3,21.5V20.5Z" fill="#38bdf8"/></svg>
-        <div class="play-text" style="margin-left: 4px;">
-          <span class="sub" style="font-size: 0.65rem;">GET IT ON</span>
-          <span class="main" style="font-size: 1rem;">Google Play</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-      <div class="stat-item">
-        <h3>10K+</h3>
-        <p>TOTAL RESOURCES</p>
-      </div>
-      <div class="stat-item">
-        <h3>1.0K</h3>
-        <p>SHADER PACKS</p>
-      </div>
-      <div class="stat-item">
-        <h3>5.7K</h3>
-        <p>TEXTURE PACKS</p>
-      </div>
-      <div class="stat-item">
-        <h3>10K+</h3>
-        <p>MODS & ADDONS</p>
-      </div>
+    <div class="pill-badge">⚡ HAND-TESTED & FPS-OPTIMIZED MINECRAFT HUB</div>
+    <h1>Discover Next-Level <span>Minecraft Shaders & Mods</span></h1>
+    <p>Welcome to ShadersForMCPE! Manually tested shader packs, resource packs, and mods for MCPE & Bedrock 1.21+.</p>
+    <div class="stats-row">
+      <div class="stat-box"><h3>10K+</h3><p>TOTAL RESOURCES</p></div>
+      <div class="stat-box"><h3>1.0K</h3><p>SHADER PACKS</p></div>
+      <div class="stat-box"><h3>5.7K</h3><p>TEXTURE PACKS</p></div>
+      <div class="stat-box"><h3>10K+</h3><p>MODS & ADDONS</p></div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <main class="container">
-    <h2 class="section-header">Featured Downloads</h2>
-    <div class="shaders-grid">
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop" alt="Azify Truly Default" class="card-img">
-        <div class="card-body">
-          <h4>Azify Truly Default</h4>
-          <p>Vanilla enhanced Bedrock shader with optimized lighting and natural fog for MCPE 1.21+.</p>
-          <a href="#" class="card-btn">Download .mcpack</a>
-        </div>
+  <div class="filter-bar-container">
+    <div class="filter-row">
+      <div class="btn-group">
+        <button class="filter-btn">⚡ All Resources</button>
+        <button class="filter-btn active">✨ Shaders</button>
+        <button class="filter-btn">🎨 Textures</button>
+        <button class="filter-btn">🔧 Mods</button>
       </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop" alt="Newb X Dragon" class="card-img">
-        <div class="card-body">
-          <h4>Newb X Dragon</h4>
-          <p>High FPS RenderDragon shader designed for smooth mobile gameplay and clear water reflections.</p>
-          <a href="#" class="card-btn">Download .mcpack</a>
-        </div>
+      <div class="btn-group">
+        <button class="filter-btn">📱 Pocket (MCPE)</button>
+        <button class="filter-btn">🧱 Bedrock</button>
+        <button class="filter-btn">☕ Java</button>
       </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop" alt="Azify Smootea" class="card-img">
-        <div class="card-body">
-          <h4>Azify Smootea</h4>
-          <p>Aesthetic color tones and water shaders tailored for mobile Minecraft creators.</p>
-          <a href="#" class="card-btn">Download .mcpack</a>
-        </div>
-      </div>
-
     </div>
-  </main>
+    <div class="filter-row">
+      <div class="btn-group">
+        <button class="filter-btn active">All Devices</button>
+        <button class="filter-btn">Low-End Devices</button>
+        <button class="filter-btn">High-End Devices</button>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search resources...">
+        <button>🔍</button>
+      </div>
+    </div>
+    <div class="page-info">Showing page 1 of 8 (169 total resources)</div>
+  </div>
+
+  <div class="main-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <div class="sidebar-title">Minecraft Version</div>
+        <ul class="sidebar-list">
+          <li><a href="#">1.21</a></li>
+          <li><a href="#">1.20</a></li>
+          <li><a href="#">1.19</a></li>
+          <li><a href="#">1.18</a></li>
+          <li><a href="#">1.17</a></li>
+          <li><a href="#">1.16</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-title">Sort By</div>
+        <select class="sort-select">
+          <option>🔥 Most Downloaded</option>
+          <option>🆕 Latest Release</option>
+        </select>
+      </div>
+    </aside>
+
+    <main class="content-area">
+      <h2 class="section-title">Latest Resources</h2>
+      <div class="shaders-grid">
+
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop" alt="Complementary Shaders - Unbound">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Complementary Shaders - Unbound</div>
+              <div class="card-desc">Preserving the elements of Minecraft with exceptional lighting and volumetric shadows.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">162,320,914</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=400&auto=format&fit=crop" alt="Complementary Shaders - Reimagined">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Complementary Shaders - Reimagined</div>
+              <div class="card-desc">Transforming the visuals of Minecraft with exceptional custom shadows and sky effects.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">130,997,203</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop" alt="BSL Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">BSL Shaders</div>
+              <div class="card-desc">Shaderpack for Minecraft: Java & Bedrock. Bright, colorful, warm ambiance.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">82,861,026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop" alt="MakeUp - Ultra Fast | Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">MakeUp - Ultra Fast | Shaders</div>
+              <div class="card-desc">High performance shaders. Gameplay oriented, extremely lightweight.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.16.3</span>
+              <span class="downloads">47,577,783</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop" alt="Sildur's Vibrant shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Sildur's Vibrant shaders</div>
+              <div class="card-desc">Very optimized shaderpack for MC with vibrant color palettes and reflections.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">36,401,066</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&auto=format&fit=crop" alt="Insanity Shader">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Insanity Shader</div>
+              <div class="card-desc">A highly customizable horror-styled Minecraft shaderpack with dark fog.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">32,724,191</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&auto=format&fit=crop" alt="Solas Shader">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Solas Shader</div>
+              <div class="card-desc">A good performing fantasy stylized shaderpack with colored light effects.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">27,122,975</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=400&auto=format&fit=crop" alt="Bliss Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Bliss Shaders</div>
+              <div class="card-desc">A well performing fantasy styled shaderpack with dynamic cloud systems.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">26,181,522</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop" alt="Pastel Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Pastel Shaders</div>
+              <div class="card-desc">An aesthetic, performant pastel colored shaderpack for casual builders.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">21,200,495</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 10 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop" alt="Hysteria Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Hysteria Shaders</div>
+              <div class="card-desc">Atmospheric, highly customizable eerie shaderpack for immersive gameplay.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.20.1</span>
+              <span class="downloads">16,397,999</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 11 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop" alt="Super Duper Vanilla Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Super Duper Vanilla Shaders</div>
+              <div class="card-desc">Conveying the iconic style of cancelled Super Duper Graphics pack.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">12,450,110</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 12 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&auto=format&fit=crop" alt="Spooklementary">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Spooklementary</div>
+              <div class="card-desc">A spooky, very moody and atmospheric horror shader edit.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">9,820,300</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 13 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&auto=format&fit=crop" alt="Mellow">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Mellow</div>
+              <div class="card-desc">Shaderpack with a painterly aesthetic for soft and warm lighting lovers.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">8,100,550</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 14 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=400&auto=format&fit=crop" alt="AstraLex Shaders">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">AstraLex Shaders</div>
+              <div class="card-desc">BSL Shader (EDIT) with a lot of cool sky options, galaxy stars & auroras.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">7,430,900</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 15 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop" alt="Prizma Visuals Legacy">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Prizma Visuals Legacy</div>
+              <div class="card-desc">Vibrant Visuals Pack optimized for Minecraft Bedrock & Java Edition.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.20.1</span>
+              <span class="downloads">6,890,120</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 16 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop" alt="Photon Shader">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Photon Shader</div>
+              <div class="card-desc">Gameplay-focused shader pack with a semi-realistic, clean graphic style.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">6,333,551</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 17 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=400&auto=format&fit=crop" alt="Sildur's Enhanced Default">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Sildur's Enhanced Default</div>
+              <div class="card-desc">Improves vanilla MC visuals with gentle shadows and subtle water reflections.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">6,099,650</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 18 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop" alt="Miniature Shader">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Miniature Shader</div>
+              <div class="card-desc">Extremely lightweight shader with realistic shadows specifically for mobile devices.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.16.3</span>
+              <span class="downloads">3,600,707</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 19 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop" alt="Luminous Dreams v1.0">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Luminous Dreams v1.0</div>
+              <div class="card-desc">Deferred Rendering lighting pack built for Minecraft Bedrock 1.21+.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.21.130</span>
+              <span class="downloads">3,380,743</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 20 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop" alt="BSL Shaders - Classic">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">BSL Shaders - Classic</div>
+              <div class="card-desc">Classic warm atmosphere shaderpack for Minecraft Java & Bedrock Edition.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">2,883,670</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 21 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&auto=format&fit=crop" alt="RedHat Shaders v34.3">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">RedHat Shaders v34.3</div>
+              <div class="card-desc">An edit focusing on semi-realism/fantasy visuals with vibrant colors.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">2,150,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 22 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop" alt="Newb Complementary...">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Newb Complementary...</div>
+              <div class="card-desc">Update to Newb Complementary featuring custom realistic sky & cloud renders.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.20.1</span>
+              <span class="downloads">1,940,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 23 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=400&auto=format&fit=crop" alt="Voyager shader 2.0">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Voyager shader 2.0</div>
+              <div class="card-desc">Adds realism for Minecraft with a clean aesthetic look and sharp shadows.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.17.1</span>
+              <span class="downloads">1,820,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 24 -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge-shaders">Shaders</span>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop" alt="Revolution Vibrant Visuals">
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-title">Revolution Vibrant Visuals</div>
+              <div class="card-desc">Aims to revolutionize graphics and lighting of Bedrock & MCPE platforms.</div>
+            </div>
+            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
+            <div class="card-footer">
+              <span>Version: 1.20.1</span>
+              <span class="downloads">1,650,000</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
 
   <footer>
     <p>&copy; 2026 ShadersForMCPE. All rights reserved. Not affiliated with Mojang Studios.</p>
