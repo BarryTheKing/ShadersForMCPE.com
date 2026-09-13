@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PiglixMCMods - Minecraft Shaders & Mods</title>
+  <title>ShadersForMCPE - Minecraft Shaders & Mods</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #05080d;
       --card-bg: #0d131f;
       --panel-bg: #0d121c;
-      --accent-green: #2ecc71;
+      --accent-blue: #0088ff; /* Mavi Renk */
       --accent-orange: #ff6b22;
       --border-color: #1a2332;
       --text-white: #ffffff;
@@ -51,7 +51,7 @@
       color: #fff;
       cursor: pointer;
     }
-    .brand span { color: var(--accent-green); }
+    .brand span { color: var(--accent-blue); }
 
     .nav-links {
       display: flex;
@@ -84,7 +84,7 @@
       font-size: 0.8rem;
     }
 
-    /* SAYFA DÜZENİ (SINGLE PAGE APPLICATION) */
+    /* SAYFA DÜZENİ */
     .page-section {
       display: none;
     }
@@ -105,9 +105,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(46, 204, 113, 0.1);
-      border: 1px solid rgba(46, 204, 113, 0.3);
-      color: var(--accent-green);
+      background: rgba(0, 136, 255, 0.1);
+      border: 1px solid rgba(0, 136, 255, 0.3);
+      color: var(--accent-blue);
       padding: 6px 16px;
       border-radius: 20px;
       font-size: 0.8rem;
@@ -122,7 +122,7 @@
       line-height: 1.2;
       margin-bottom: 1.2rem;
     }
-    .hero h1 span { color: var(--accent-green); }
+    .hero h1 span { color: var(--accent-blue); }
 
     .hero p {
       color: var(--text-gray);
@@ -148,7 +148,7 @@
     .stat-number {
       font-size: 2rem;
       font-weight: 800;
-      color: var(--accent-green);
+      color: var(--accent-blue);
       margin-bottom: 4px;
     }
 
@@ -182,13 +182,13 @@
 
     .shader-card:hover {
       transform: translateY(-5px);
-      border-color: var(--accent-green);
+      border-color: var(--accent-blue);
     }
 
     .card-img {
       width: 100%;
       height: 160px;
-      background: linear-gradient(135deg, #a83232, #1a1a1a);
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -255,7 +255,7 @@
       width: 70px;
       height: 70px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #a83232, #1a1a1a);
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -274,8 +274,8 @@
     }
 
     .author-name {
-      background: #231d38;
-      color: #b182ff;
+      background: #1a2333;
+      color: var(--accent-blue);
       padding: 2px 8px;
       border-radius: 12px;
       font-weight: 600;
@@ -317,7 +317,7 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: var(--accent-green);
+      background-color: var(--accent-blue);
     }
 
     .content-grid {
@@ -345,7 +345,7 @@
     }
 
     .specs-title {
-      color: var(--accent-green);
+      color: var(--accent-blue);
       font-size: 1.1rem;
       display: flex;
       align-items: center;
@@ -460,8 +460,8 @@
     .modal-box p { color: var(--text-gray); margin-bottom: 1.5rem; font-size: 0.9rem; }
 
     .modal-close {
-      background: var(--accent-green);
-      color: #000;
+      background: var(--accent-blue);
+      color: #fff;
       border: none;
       padding: 10px 24px;
       border-radius: 6px;
@@ -476,8 +476,8 @@
   <!-- HEADER NAVBAR -->
   <header>
     <div class="brand" onclick="showHome()">
-      <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i>
-      Piglix<span>MCMods</span>
+      <i class="fa-solid fa-cube" style="color: var(--accent-blue);"></i>
+      ShadersFor<span>MCPE</span>
     </div>
     <ul class="nav-links">
       <li><a id="nav-home" class="active" onclick="showHome()">Home</a></li>
@@ -506,7 +506,7 @@
       <h1>Discover Next-Level<br><span>Minecraft Shaders & Mods</span></h1>
       
       <p>
-        Welcome to Piglix MC Mods! Our curation team manually tests every shader, resource pack, and 
+        Welcome to ShadersForMCPE! Our curation team manually tests every shader, resource pack, and 
         mod on this page to ensure full compatibility with Minecraft 1.21+ and maximum frame-rate optimization. 
         Explore our hand-picked collection below.
       </p>
@@ -678,7 +678,7 @@
     <div class="modal-box">
       <h3>AstraLex Shaders Hazırlanıyor!</h3>
       <p>İndirme işleminiz birkaç saniye içinde otomatik olarak başlayacaktır...</p>
-      <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-green);"></i>
+      <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-blue);"></i>
       <br>
       <button class="modal-close" id="closeModal">Kapat</button>
     </div>
@@ -714,7 +714,6 @@
     downloadBtn.addEventListener('click', () => {
       downloadModal.style.display = 'flex';
 
-      // 2 saniye sonra gerçek .zip shader dosyasını oluşturup indirme başlatır
       setTimeout(() => {
         const dummyContent = "AstraLex Shaders Pack - Minecraft Edition";
         const blob = new Blob([dummyContent], { type: "application/zip" });
