@@ -1,303 +1,533 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShadersForMCPE — Discover Next-Level Minecraft Shaders & Mods</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>AstraLex Shaders - PiglixMCMods</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --bg-black: #05080d;
-      --card-bg: #0d131f;
-      --border-color: #1a2333;
-      --diamond-blue: #38bdf8;
-      --diamond-blue-bright: #7dd3fc;
+      --bg-dark: #0a0e17;
+      --card-bg: #121824;
+      --panel-bg: #0d121c;
+      --accent-green: #2ecc71;
+      --accent-orange: #ff6b22;
+      --border-color: #1a2332;
       --text-white: #ffffff;
       --text-gray: #94a3b8;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg-black); color: var(--text-white); min-height: 100vh; display: flex; flex-direction: column; }
-    
-    /* Navbar */
-    header { background: rgba(5, 8, 13, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); padding: 0.9rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .brand-icon { width: 36px; height: 36px; background: rgba(56, 189, 248, 0.15); border: 1px solid var(--diamond-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .brand-text { font-size: 1.4rem; font-weight: 800; color: var(--text-white); }
-    .brand-text span { color: var(--diamond-blue); }
-    .nav-menu { display: flex; gap: 1.4rem; }
-    .nav-menu a { color: var(--text-gray); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
-    .nav-menu a:hover, .nav-menu a.active { color: var(--text-white); }
-    .play-btn { background: #000; border: 1px solid #334155; padding: 6px 14px; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-decoration: none; color: #fff; }
-    .play-text { display: flex; flex-direction: column; font-size: 0.8rem; font-weight: 800; }
-    .play-text .sub { font-size: 0.55rem; color: #94a3b8; }
 
-    /* Hero & Stats */
-    .hero { text-align: center; max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 1.5rem; }
-    .pill-badge { display: inline-flex; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--diamond-blue-bright); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; margin-bottom: 1rem; }
-    .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 0.8rem; }
-    .hero h1 span { color: var(--diamond-blue-bright); }
-    .hero p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
-    .stats-row { display: flex; justify-content: center; gap: 3rem; }
-    .stat-box h3 { font-size: 1.6rem; color: var(--diamond-blue-bright); font-weight: 900; }
-    .stat-box p { font-size: 0.68rem; font-weight: 800; color: #64748b; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    /* Filter Bar */
-    .filter-bar-container { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
-    .filter-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
-    .filter-btn { background: #090e17; border: 1px solid var(--border-color); color: var(--text-gray); padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
-    .filter-btn:hover, .filter-btn.active { background: rgba(56, 189, 248, 0.15); border-color: var(--diamond-blue); color: var(--diamond-blue-bright); }
-    .search-box { display: flex; background: #090e17; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; width: 260px; }
-    .search-box input { background: transparent; border: none; padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none; width: 100%; }
-    .search-box button { background: var(--diamond-blue); border: none; padding: 8px 12px; cursor: pointer; font-weight: bold; }
-    .page-info { color: var(--text-gray); font-size: 0.82rem; text-align: right; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+    }
 
-    /* Main Content */
-    .main-wrapper { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 4rem; display: flex; gap: 2rem; width: 100%; }
-    .sidebar { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1.2rem; }
-    .sidebar-block { background: #090e17; border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; }
-    .sidebar-title { font-size: 0.72rem; font-weight: 800; color: #64748b; margin-bottom: 0.8rem; text-transform: uppercase; }
-    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .sidebar-list a { color: var(--text-gray); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
-    .sidebar-list a:hover { color: var(--diamond-blue-bright); }
-    .sort-select { width: 100%; background: #05080d; border: 1px solid var(--border-color); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 0.82rem; }
+    /* HEADER */
+    header {
+      background-color: #080b12;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-    .content-area { flex-grow: 1; }
-    .section-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; }
-    .shaders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .brand span { color: var(--accent-green); }
 
-    /* Cards */
-    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
-    .card:hover { transform: translateY(-3px); border-color: var(--diamond-blue); }
-    .card-img-wrap { position: relative; height: 130px; background: #111827; }
-    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .badge-shaders { position: absolute; top: 6px; left: 6px; background: rgba(245, 158, 11, 0.9); color: #000; font-size: 0.58rem; font-weight: 900; padding: 2px 5px; border-radius: 4px; }
-    .card-body { padding: 0.9rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-    .card-title { font-size: 0.9rem; font-weight: 800; margin-bottom: 0.3rem; line-height: 1.2; }
-    .card-desc { font-size: 0.72rem; color: var(--text-gray); line-height: 1.3; margin-bottom: 0.6rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-meta { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 6px; padding: 5px 7px; margin-bottom: 0.6rem; }
-    .card-meta p { font-size: 0.68rem; color: var(--diamond-blue-bright); font-weight: 700; }
-    .card-footer { display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 0.5rem; font-size: 0.7rem; color: #64748b; font-weight: 700; }
-    .downloads { color: var(--diamond-blue-bright); font-weight: 800; }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
 
-    footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.8rem; border-top: 1px solid var(--border-color); margin-top: auto; }
-    @media (max-width: 900px) { .main-wrapper { flex-direction: column; } .sidebar { width: 100%; } .nav-menu { display: none; } }
+    .nav-links a {
+      color: var(--text-gray);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+    }
+
+    .play-btn {
+      background: #111;
+      border: 1px solid #333;
+      padding: 6px 14px;
+      border-radius: 6px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* BREADCRUMB & BACK */
+    .top-navigation {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-btn {
+      background-color: #1a2233;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumbs {
+      color: var(--text-gray);
+      font-size: 0.85rem;
+    }
+    .breadcrumbs span { color: #fff; }
+
+    /* RESOURCE HEADER */
+    .resource-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .resource-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #a83232, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .resource-info h1 {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .author-badge {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+    }
+
+    .author-name {
+      background: #231d38;
+      color: #b182ff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .subtitle {
+      color: var(--text-gray);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-gray);
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .tab-btn.active {
+      color: #fff;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-green);
+    }
+
+    /* CONTENT LAYOUT */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+    }
+
+    /* LEFT MAIN PANEL */
+    .main-panel {
+      background-color: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .main-panel h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .main-panel p {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .specs-title {
+      color: var(--accent-green);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table tr {
+      border-bottom: 1px solid #162032;
+    }
+
+    .specs-table td {
+      padding: 14px 0;
+      font-size: 0.9rem;
+    }
+
+    .specs-table td:first-child {
+      color: var(--text-gray);
+    }
+
+    .specs-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* RIGHT SIDEBAR */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .download-btn {
+      flex: 1;
+      background-color: var(--accent-orange);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background-color: #e55a15;
+    }
+
+    .icon-btn {
+      background-color: #162032;
+      color: var(--text-gray);
+      border: 1px solid var(--border-color);
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .details-box {
+      background-color: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .details-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 0.88rem;
+    }
+
+    .detail-row .label { color: var(--text-gray); }
+    .detail-row .value { font-weight: 600; }
+
+    .copy-id {
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    /* MODAL (İndirme Penceresi) */
+    .modal-overlay {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-box h3 { margin-bottom: 1rem; }
+    .modal-box p { color: var(--text-gray); margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+    .modal-close {
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
-    <a href="#" class="brand">
-      <div class="brand-icon">🗡️</div>
-      <div class="brand-text"><span>Shaders</span>ForMCPE</div>
-    </a>
-    <nav class="nav-menu">
-      <a href="#" class="active">Home</a>
-      <a href="#">Shaders</a>
-      <a href="#">Textures</a>
-      <a href="#">Mods</a>
-      <a href="#">Low-End Shaders</a>
-      <a href="#">RTX Shaders</a>
-      <a href="#">Shout-Outs</a>
-      <a href="#">Saved</a>
-    </nav>
-    <a href="#" class="play-btn">
-      <div class="play-text">
-        <span class="sub">GET IT ON</span>
-        <span>Google Play</span>
-      </div>
-    </a>
+    <div class="brand">
+      <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i>
+      Piglix<span>MCMods</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#" class="active">Shaders</a></li>
+      <li><a href="#">Textures</a></li>
+      <li><a href="#">Mods</a></li>
+      <li><a href="#">Low-End Shaders</a></li>
+      <li><a href="#">RTX Shaders</a></li>
+      <li><a href="#">Shout-Outs</a></li>
+      <li><a href="#">Saved</a></li>
+    </ul>
+    <div class="play-btn">
+      <i class="fa-brands fa-google-play" style="color: #00f0ff;"></i> GET IT ON Google Play
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="pill-badge">⚡ HAND-TESTED & FPS-OPTIMIZED MINECRAFT HUB</div>
-    <h1>Discover Next-Level <span>Minecraft Shaders & Mods</span></h1>
-    <p>Welcome to ShadersForMCPE! Manually tested shader packs, resource packs, and mods for MCPE & Bedrock 1.21+.</p>
-    <div class="stats-row">
-      <div class="stat-box"><h3>10K+</h3><p>TOTAL RESOURCES</p></div>
-      <div class="stat-box"><h3>1.0K</h3><p>SHADER PACKS</p></div>
-      <div class="stat-box"><h3>5.7K</h3><p>TEXTURE PACKS</p></div>
-      <div class="stat-box"><h3>10K+</h3><p>MODS & ADDONS</p></div>
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    
+    <!-- NAVIGATION -->
+    <div class="top-navigation">
+      <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+      <div class="breadcrumbs">
+        Minecraft &gt; Shaders &gt; <span>AstraLex Shaders</span>
+      </div>
     </div>
-  </section>
 
-  <div class="filter-bar-container">
-    <div class="filter-row">
-      <div class="btn-group">
-        <button class="filter-btn">⚡ All Resources</button>
-        <button class="filter-btn active">✨ Shaders</button>
-        <button class="filter-btn">🎨 Textures</button>
-        <button class="filter-btn">🔧 Mods</button>
-      </div>
-      <div class="btn-group">
-        <button class="filter-btn">📱 Pocket (MCPE)</button>
-        <button class="filter-btn">🧱 Bedrock</button>
-        <button class="filter-btn">☕ Java</button>
+    <!-- HEADER SECTION -->
+    <div class="resource-header">
+      <div class="resource-icon">A</div>
+      <div class="resource-info">
+        <h1>AstraLex Shaders</h1>
+        <div class="author-badge">By <span class="author-name">● LexBoostT</span></div>
       </div>
     </div>
-    <div class="filter-row">
-      <div class="btn-group">
-        <button class="filter-btn active">All Devices</button>
-        <button class="filter-btn">Low-End Devices</button>
-        <button class="filter-btn">High-End Devices</button>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search resources...">
-        <button>🔍</button>
-      </div>
+
+    <p class="subtitle">BSL Shader (EDIT) with a lot of cool options !</p>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active">Description</button>
+      <button class="tab-btn">Comments (0)</button>
+      <button class="tab-btn">Gallery</button>
     </div>
-    <div class="page-info">Showing page 1 of 8 (169 total resources)</div>
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid">
+      
+      <!-- LEFT MAIN PANEL -->
+      <div class="main-panel">
+        <h2>Why AstraLex Shaders is a top-tier shader mod for Minecraft 1.16.3</h2>
+        <p>BSL Shader (EDIT) with a lot of cool options !</p>
+
+        <div class="specs-title">
+          <i class="fa-solid fa-gear"></i> Quick Resource Specs
+        </div>
+
+        <table class="specs-table">
+          <tr>
+            <td>Mod Creator</td>
+            <td>LexBoostT</td>
+          </tr>
+          <tr>
+            <td>Latest Version</td>
+            <td>1.16.3</td>
+          </tr>
+          <tr>
+            <td>Supported Game Versions</td>
+            <td>1.21.11, 1.21.10, 1.21.9, 1.21.8, 1.21.7</td>
+          </tr>
+          <tr>
+            <td>File Size</td>
+            <td>3.04 MB</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="sidebar">
+        
+        <!-- BUTTONS -->
+        <div class="action-buttons">
+          <button class="download-btn" id="startDownload">Download</button>
+          <button class="icon-btn"><i class="fa-regular fa-thumbs-up"></i> 0</button>
+          <button class="icon-btn"><i class="fa-regular fa-star"></i></button>
+          <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        </div>
+
+        <!-- DETAILS BOX -->
+        <div class="details-box">
+          <h3>Details</h3>
+          
+          <div class="detail-row">
+            <span class="label">Downloads:</span>
+            <span class="value">8.748.075</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Created:</span>
+            <span class="value">6 years ago</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Updated:</span>
+            <span class="value">2 months ago</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Project ID:</span>
+            <span class="value">406081 <button class="copy-id"><i class="fa-regular fa-copy"></i></button></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">License:</span>
+            <span class="value">All Rights Reserved</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Environment:</span>
+            <span class="value"><i class="fa-solid fa-display"></i> Client</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="main-wrapper">
-    <aside class="sidebar">
-      <div class="sidebar-block">
-        <div class="sidebar-title">Minecraft Version</div>
-        <ul class="sidebar-list">
-          <li><a href="#">1.21</a></li>
-          <li><a href="#">1.20</a></li>
-          <li><a href="#">1.19</a></li>
-          <li><a href="#">1.18</a></li>
-          <li><a href="#">1.17</a></li>
-          <li><a href="#">1.16</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-block">
-        <div class="sidebar-title">Sort By</div>
-        <select class="sort-select">
-          <option>🔥 Most Downloaded</option>
-          <option>🆕 Latest Release</option>
-        </select>
-      </div>
-    </aside>
-
-    <main class="content-area">
-      <h2 class="section-title">Latest Resources</h2>
-      <div class="shaders-grid">
-
-        <!-- Card 1: Complementary Unbound -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://raw.githubusercontent.com/ComplementaryDevelopment/ComplementaryUnbound/main/TitleImage.png" alt="Complementary Shaders - Unbound">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">Complementary Shaders - Unbound</div>
-              <div class="card-desc">Preserving the elements of Minecraft with exceptional lighting and volumetric shadows.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.17.1</span>
-              <span class="downloads">162,320,914</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: BSL Shaders -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://bitslablab.com/img/bslshaders/header.png" alt="BSL Shaders">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">BSL Shaders</div>
-              <div class="card-desc">Shaderpack for Minecraft: Java & Bedrock. Bright, colorful, warm ambiance.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.17.1</span>
-              <span class="downloads">82,861,026</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: SEUS PTGI -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://sonicether.com/wp-content/uploads/2019/04/2019-04-12_15.56.02-1024x576.png" alt="SEUS PTGI HRR">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">SEUS PTGI HRR</div>
-              <div class="card-desc">Ray tracing style path-traced lighting and realistic physics reflections.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.20.1</span>
-              <span class="downloads">47,577,783</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Newb X Dragon Shader (MCPE) -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://mcpedl.com/wp-content/uploads/2021/04/newb-shader_1.png" alt="Newb X Dragon Shader">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">Newb X Dragon Shader</div>
-              <div class="card-desc">Optimized lightweight mobile shader designed for smooth performance on MCPE.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.20.1</span>
-              <span class="downloads">36,401,066</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5: Insanity Shader -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://raw.githubusercontent.com/ComplementaryDevelopment/ComplementaryUnbound/main/TitleImage.png" alt="Insanity Shader">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">Insanity Shader</div>
-              <div class="card-desc">A highly customizable horror-styled Minecraft shaderpack with dark fog.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.17.1</span>
-              <span class="downloads">32,724,191</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 6: Solas Shader -->
-        <div class="card">
-          <div class="card-img-wrap">
-            <span class="badge-shaders">Shaders</span>
-            <img src="https://bitslablab.com/img/bslshaders/header.png" alt="Solas Shader">
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="card-title">Solas Shader</div>
-              <div class="card-desc">A good performing fantasy stylized shaderpack with colored light effects.</div>
-            </div>
-            <div class="card-meta"><p>Stunning volumetric lighting effects, recommended for devices.</p></div>
-            <div class="card-footer">
-              <span>Version: 1.17.1</span>
-              <span class="downloads">27,122,975</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </main>
+  <!-- INDIRME MODALI (POPUP) -->
+  <div class="modal-overlay" id="downloadModal">
+    <div class="modal-box">
+      <h3>AstraLex Shaders İndiriliyor!</h3>
+      <p>İndirme işleminiz 3 saniye içinde başlayacaktır...</p>
+      <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--accent-green);"></i>
+      <br>
+      <button class="modal-close" id="closeModal">Kapat</button>
+    </div>
   </div>
 
-  <footer>
-    <p>&copy; 2026 ShadersForMCPE. All rights reserved. Not affiliated with Mojang Studios.</p>
-  </footer>
+  <script>
+    const downloadBtn = document.getElementById('startDownload');
+    const downloadModal = document.getElementById('downloadModal');
+    const closeModal = document.getElementById('closeModal');
+
+    downloadBtn.addEventListener('click', () => {
+      downloadModal.style.display = 'flex';
+      
+      // Simüle edilen indirme
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.download = 'AstraLex_Shaders_v1.16.3.zip';
+        // alert("İndirme başladı!");
+      }, 2000);
+    });
+
+    closeModal.addEventListener('click', () => {
+      downloadModal.style.display = 'none';
+    });
+  </script>
 
 </body>
 </html>
