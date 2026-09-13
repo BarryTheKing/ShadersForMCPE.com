@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PiglixMCMods - Minecraft Shaders & Mods</title>
+  <title>ShadersForMCPE - Minecraft Shaders & Mods</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -12,8 +12,8 @@
       --bg-dark: #080b11;
       --card-bg: #0d121c;
       --card-border: #1a2332;
-      --accent-green: #22c55e;
-      --accent-green-bg: rgba(34, 197, 94, 0.1);
+      --accent-blue: #3b82f6;
+      --accent-blue-bg: rgba(59, 130, 246, 0.1);
       --text-main: #ffffff;
       --text-muted: #8e9bb0;
     }
@@ -33,7 +33,7 @@
     }
 
     .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.3rem; color: #fff; cursor: pointer; }
-    .brand span { color: var(--accent-green); }
+    .brand span { color: var(--accent-blue); }
 
     .nav-links { display: flex; gap: 20px; list-style: none; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
@@ -43,6 +43,33 @@
       background: #000; border: 1px solid #333; padding: 6px 12px; border-radius: 6px;
       color: #fff; display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer;
     }
+
+    /* HERO SECTION */
+    .hero-container {
+      position: relative;
+      text-align: center;
+      padding: 4rem 1.5rem 3rem 1.5rem;
+      background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-blue-bg); border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--accent-blue); font-size: 0.75rem; font-weight: 800; padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 1.5rem; text-transform: uppercase;
+    }
+
+    .hero-title { font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    .hero-title span { color: var(--accent-blue); }
+
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 700px; margin: 0 auto 2rem auto; line-height: 1.6; }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap;
+    }
+    .hero-stat h3 { font-size: 1.6rem; font-weight: 800; color: #fff; }
+    .hero-stat p { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; margin-top: 2px; text-transform: uppercase; }
 
     /* MAIN CONTAINER */
     .main-layout {
@@ -54,7 +81,7 @@
       gap: 2rem;
     }
 
-    /* SIDEBAR (PIGLIX STYLE) */
+    /* SIDEBAR */
     .sidebar-section { margin-bottom: 2rem; }
     .sidebar-title {
       font-size: 0.75rem; font-weight: 800; color: var(--text-muted);
@@ -66,7 +93,7 @@
       color: var(--text-muted); font-size: 0.9rem; font-weight: 600;
       cursor: pointer; padding: 4px 0; transition: color 0.2s;
     }
-    .version-item:hover, .version-item.active { color: var(--accent-green); }
+    .version-item:hover, .version-item.active { color: var(--accent-blue); }
 
     .sort-select {
       width: 100%; background: #0d121c; border: 1px solid var(--card-border);
@@ -90,7 +117,7 @@
       display: flex; flex-direction: column; justify-content: space-between;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .card:hover { border-color: var(--accent-green); transform: translateY(-3px); }
+    .card:hover { border-color: var(--accent-blue); transform: translateY(-3px); }
 
     .card-banner {
       width: 100%; height: 110px; background-size: cover; background-position: center;
@@ -99,7 +126,7 @@
 
     .card-badge {
       position: absolute; top: 8px; left: 8px;
-      background: var(--accent-green); color: #000;
+      background: var(--accent-blue); color: #fff;
       font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;
       text-transform: uppercase;
     }
@@ -109,8 +136,8 @@
     .card-desc { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
 
     .card-feature {
-      background: var(--accent-green-bg); border: 1px solid rgba(34, 197, 94, 0.2);
-      color: #4ade80; font-size: 0.7rem; padding: 6px 8px; border-radius: 6px; margin-bottom: 12px; line-height: 1.3;
+      background: var(--accent-blue-bg); border: 1px solid rgba(59, 130, 246, 0.2);
+      color: #60a5fa; font-size: 0.7rem; padding: 6px 8px; border-radius: 6px; margin-bottom: 12px; line-height: 1.3;
     }
 
     .card-footer {
@@ -132,13 +159,13 @@
 
     .shoutout-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--accent-green-bg); border: 1px solid rgba(34, 197, 94, 0.3);
-      color: var(--accent-green); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px;
+      background: var(--accent-blue-bg); border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--accent-blue); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px;
       margin-bottom: 1.5rem;
     }
 
     .shoutout-title { font-size: 2.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
-    .shoutout-title span { color: var(--accent-green); }
+    .shoutout-title span { color: var(--accent-blue); }
 
     .shoutout-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6; }
 
@@ -152,29 +179,28 @@
     .stat-box h3 { font-size: 1.4rem; font-weight: 800; color: #fff; }
     .stat-box p { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 4px; }
 
-    /* COMMENTS BOARD (WOODEN PANELS) */
+    /* COMMENTS BOARD */
     .comments-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;
     }
 
     .wood-comment {
       background: #121824; border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem;
-      position: relative;
     }
 
     .wood-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .user-info { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; }
-    .user-avatar { width: 24px; height: 24px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+    .user-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-blue); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
     .pinned-badge { background: #ff0000; color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
 
     .wood-sign {
-      background: #5c3a21; border: 2px solid #3d2312; color: #fce7f3; padding: 10px; border-radius: 6px;
-      font-size: 0.75rem; line-height: 1.3; font-weight: 600; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      background: #1e293b; border: 1px solid var(--card-border); color: #f1f5f9; padding: 10px; border-radius: 6px;
+      font-size: 0.75rem; line-height: 1.3; font-weight: 600;
     }
 
     .wood-footer { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; }
 
-    /* FOOTER (PIGLIX EXACT) */
+    /* FOOTER */
     footer {
       background: #05070c; border-top: 1px solid var(--card-border); padding: 4rem 2rem 2rem 2rem; margin-top: 4rem;
     }
@@ -193,7 +219,7 @@
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 8px; }
     .footer-col ul li a { color: #cbd5e1; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: var(--accent-green); }
+    .footer-col ul li a:hover { color: var(--accent-blue); }
 
     .footer-bottom {
       max-width: 1350px; margin: 2rem auto 0 auto; display: flex; justify-content: space-between;
@@ -206,8 +232,8 @@
   <!-- HEADER -->
   <header>
     <div class="brand">
-      <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i>
-      Piglix<span>MCMods</span>
+      <i class="fa-solid fa-cube" style="color: var(--accent-blue);"></i>
+      ShadersFor<span>MCPE</span>
     </div>
     <ul class="nav-links">
       <li><a class="active">Home</a></li>
@@ -223,6 +249,26 @@
       <i class="fa-brands fa-google-play" style="color: #00f0ff;"></i> GET IT ON Google Play
     </div>
   </header>
+
+  <!-- HERO SECTION -->
+  <div class="hero-container">
+    <div class="hero-badge"><i class="fa-solid fa-bolt"></i> HAND-TESTED & FPS-OPTIMIZED MINECRAFT HUB</div>
+    <h1 class="hero-title">Discover Next-Level<br><span>Minecraft Shaders & Mods</span></h1>
+    <p class="hero-desc">Welcome to ShadersForMCPE! Our curation team manually tests every shader, resource pack, and mod on this page to ensure full compatibility with Minecraft 1.21+ and maximum frame-rate optimization. Explore our hand-picked collection below.</p>
+    
+    <div style="display: flex; justify-content: center;">
+      <div class="play-btn" style="padding: 10px 20px; font-size: 0.9rem;">
+        <i class="fa-brands fa-google-play" style="color: #00f0ff; font-size: 1.2rem;"></i> GET IT ON Google Play
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><h3>10K+</h3><p>TOTAL RESOURCES</p></div>
+      <div class="hero-stat"><h3>1.0K</h3><p>SHADER PACKS</p></div>
+      <div class="hero-stat"><h3>5.7K</h3><p>TEXTURE PACKS</p></div>
+      <div class="hero-stat"><h3>10K+</h3><p>MODS & ADDONS</p></div>
+    </div>
+  </div>
 
   <!-- MAIN LAYOUT -->
   <div class="main-layout">
@@ -385,7 +431,7 @@
         <p class="shoutout-desc">Every week we showcase the top Minecraft PE shader reviews, FPS benchmarks, and epic comments from our YouTube channel.</p>
         
         <a class="yt-btn" href="https://youtube.com" target="_blank">
-          <i class="fa-brands fa-youtube"></i> Visit @realpiglix YouTube Channel
+          <i class="fa-brands fa-youtube"></i> Visit YouTube Channel
         </a>
 
         <div class="stats-row">
@@ -396,49 +442,48 @@
         </div>
       </div>
 
-      <!-- CHARACTER PREVIEW -->
-      <div style="background: linear-gradient(180deg, rgba(34,197,94,0.1), transparent); border-radius: 12px; display: flex; align-items: center; justify-content: center; position: relative;">
-        <i class="fa-solid fa-gamepad fa-5x" style="color: var(--accent-green); opacity: 0.5;"></i>
+      <div style="background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), transparent); border-radius: 12px; display: flex; align-items: center; justify-content: center; position: relative;">
+        <i class="fa-solid fa-gamepad fa-5x" style="color: var(--accent-blue); opacity: 0.5;"></i>
       </div>
     </div>
 
-    <!-- COMMENTS WOODEN BOARDS -->
+    <!-- COMMENTS BOARDS -->
     <div class="comments-grid">
       
       <div class="wood-comment">
         <div class="wood-header">
-          <div class="user-info"><div class="user-avatar">V</div> VoxelKnightMC <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <div class="user-info"><div class="user-avatar">V</div> VoxelKnightMC <i class="fa-solid fa-circle-check" style="color:var(--accent-blue);"></i></div>
           <span class="pinned-badge">📌 Pinned</span>
         </div>
         <div class="wood-sign">"The way you explain how to bypass the Render Dragon limitations on Bedrock is way clearer than..."</div>
-        <div class="wood-footer"><span>👍 512</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+        <div class="wood-footer"><span>👍 512</span> <span style="color: #ef4444;">♥ Hearted</span></div>
       </div>
 
       <div class="wood-comment">
         <div class="wood-header">
-          <div class="user-info"><div class="user-avatar" style="background:#ec4899;">P</div> PixelQueen_99 <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <div class="user-info"><div class="user-avatar" style="background:#ec4899;">P</div> PixelQueen_99 <i class="fa-solid fa-circle-check" style="color:var(--accent-blue);"></i></div>
           <span class="pinned-badge">📌 Pinned</span>
         </div>
         <div class="wood-sign">"That RTX Medieval 32x pack you showcased at 04:15 made my survival castle look like a AAA Unre..."</div>
-        <div class="wood-footer"><span>👍 389</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+        <div class="wood-footer"><span>👍 389</span> <span style="color: #ef4444;">♥ Hearted</span></div>
       </div>
 
       <div class="wood-comment">
         <div class="wood-header">
-          <div class="user-info"><div class="user-avatar" style="background:#10b981;">R</div> RedstoneWizard_Z <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <div class="user-info"><div class="user-avatar" style="background:#10b981;">R</div> RedstoneWizard_Z <i class="fa-solid fa-circle-check" style="color:var(--accent-blue);"></i></div>
           <span class="pinned-badge">📌 Pinned</span>
         </div>
         <div class="wood-sign">"Idea: Can you test the new Create Mod Bedrock port with chunk pre-loader addons to see if automation..."</div>
-        <div class="wood-footer"><span>👍 275</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+        <div class="wood-footer"><span>👍 275</span> <span style="color: #ef4444;">♥ Hearted</span></div>
       </div>
 
       <div class="wood-comment">
         <div class="wood-header">
-          <div class="user-info"><div class="user-avatar" style="background:#8b5cf6;">C</div> CreeperWhisperer <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <div class="user-info"><div class="user-avatar" style="background:#8b5cf6;">C</div> CreeperWhisperer <i class="fa-solid fa-circle-check" style="color:var(--accent-blue);"></i></div>
           <span class="pinned-badge">📌 Pinned</span>
         </div>
         <div class="wood-sign">"I turned on the fog shader you showed in the video at 2 AM, walked into a dark cave, heard a warden..."</div>
-        <div class="wood-footer"><span>👍 620</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+        <div class="wood-footer"><span>👍 620</span> <span style="color: #ef4444;">♥ Hearted</span></div>
       </div>
 
     </div>
@@ -448,7 +493,7 @@
   <footer>
     <div class="footer-app-banner">
       <div>
-        <div style="color: var(--accent-green); font-size: 0.75rem; font-weight: 800; margin-bottom: 4px;">OFFICIAL MOBILE APP</div>
+        <div style="color: var(--accent-blue); font-size: 0.75rem; font-weight: 800; margin-bottom: 4px;">OFFICIAL MOBILE APP</div>
         <h3 style="font-size: 1.2rem; color: #fff;">Get the Android App — Free on Play Store</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem;">Download hand-tested shaders, texture packs & mods directly to your Android device with 1-click install links.</p>
       </div>
@@ -460,10 +505,10 @@
     <div class="footer-grid">
       <div>
         <div class="brand" style="margin-bottom: 1rem;">
-          <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i> Piglix<span>MCMods</span>
+          <i class="fa-solid fa-cube" style="color: var(--accent-blue);"></i> ShadersFor<span>MCPE</span>
         </div>
         <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem;">Curated Minecraft resource discovery with a dark, crafted interface for fans and creators.</p>
-        <span style="background: #111827; border: 1px solid var(--card-border); color: var(--accent-green); font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700;">Independent Minecraft fan hub</span>
+        <span style="background: #111827; border: 1px solid var(--card-border); color: var(--accent-blue); font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700;">Independent Minecraft fan hub</span>
       </div>
 
       <div class="footer-col">
@@ -504,7 +549,7 @@
       <div class="footer-col">
         <h4>COMMUNITY & SOCIALS</h4>
         <ul>
-          <li><a href="#" style="color: var(--accent-green);"><i class="fa-brands fa-google-play"></i> Get Android App</a></li>
+          <li><a href="#" style="color: var(--accent-blue);"><i class="fa-brands fa-google-play"></i> Get Android App</a></li>
           <li><a href="#" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i> YouTube Channel</a></li>
           <li><a href="#"><i class="fa-solid fa-bullhorn"></i> Community Shout-Outs</a></li>
           <li><a href="#" style="color: #ec4899;"><i class="fa-brands fa-instagram"></i> Instagram Community</a></li>
@@ -513,7 +558,7 @@
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 PiglixMCMods. All rights reserved.</div>
+      <div>© 2026 ShadersForMCPE. All rights reserved.</div>
       <div>Designed for Minecraft explorers, builders, and shader fans.</div>
     </div>
   </footer>
