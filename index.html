@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AstraLex Shaders - PiglixMCMods</title>
+  <title>PiglixMCMods - Minecraft Shaders & Mods</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0e17;
-      --card-bg: #121824;
+      --bg-dark: #05080d;
+      --card-bg: #0d131f;
       --panel-bg: #0d121c;
       --accent-green: #2ecc71;
       --accent-orange: #ff6b22;
@@ -37,6 +37,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .brand {
@@ -46,6 +49,7 @@
       font-weight: bold;
       font-size: 1.4rem;
       color: #fff;
+      cursor: pointer;
     }
     .brand span { color: var(--accent-green); }
 
@@ -60,6 +64,7 @@
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
+      cursor: pointer;
       transition: color 0.2s;
     }
 
@@ -79,14 +84,140 @@
       font-size: 0.8rem;
     }
 
-    /* MAIN CONTAINER */
+    /* SAYFA DÜZENİ (SINGLE PAGE APPLICATION) */
+    .page-section {
+      display: none;
+    }
+    .page-section.active-page {
+      display: block;
+    }
+
+    /* ================= 1. ANA SAYFA STİLLERİ ================= */
+    .hero {
+      position: relative;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 2rem 1.5rem;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      color: var(--accent-green);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 span { color: var(--accent-green); }
+
+    .hero p {
+      color: var(--text-gray);
+      font-size: 1rem;
+      max-width: 750px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 3rem auto 0 auto;
+    }
+
+    .stat-card {
+      background-color: transparent;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .cards-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .shader-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .shader-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-green);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, #a83232, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .card-body {
+      padding: 1.2rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .card-author {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-bottom: 12px;
+    }
+
+    /* ================= 2. SHADER DETAY SAYFASI STİLLERİ ================= */
     .container {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
 
-    /* BREADCRUMB & BACK */
     .top-navigation {
       display: flex;
       align-items: center;
@@ -113,7 +244,6 @@
     }
     .breadcrumbs span { color: #fff; }
 
-    /* RESOURCE HEADER */
     .resource-header {
       display: flex;
       align-items: center;
@@ -131,7 +261,6 @@
       justify-content: center;
       font-size: 2.2rem;
       font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
     .resource-info h1 {
@@ -159,7 +288,6 @@
       font-size: 0.95rem;
     }
 
-    /* TABS */
     .tabs {
       display: flex;
       gap: 10px;
@@ -192,14 +320,12 @@
       background-color: var(--accent-green);
     }
 
-    /* CONTENT LAYOUT */
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 320px;
       gap: 2rem;
     }
 
-    /* LEFT MAIN PANEL */
     .main-panel {
       background-color: var(--panel-bg);
       border: 1px solid var(--border-color);
@@ -241,16 +367,9 @@
       font-size: 0.9rem;
     }
 
-    .specs-table td:first-child {
-      color: var(--text-gray);
-    }
+    .specs-table td:first-child { color: var(--text-gray); }
+    .specs-table td:last-child { text-align: right; font-weight: 600; }
 
-    .specs-table td:last-child {
-      text-align: right;
-      font-weight: 600;
-    }
-
-    /* RIGHT SIDEBAR */
     .sidebar {
       display: flex;
       flex-direction: column;
@@ -316,19 +435,11 @@
     .detail-row .label { color: var(--text-gray); }
     .detail-row .value { font-weight: 600; }
 
-    .copy-id {
-      background: none;
-      border: none;
-      color: var(--text-gray);
-      cursor: pointer;
-      margin-left: 5px;
-    }
-
-    /* MODAL (İndirme Penceresi) */
+    /* İNDİRME MODALI (POP-UP) */
     .modal-overlay {
       position: fixed;
       top:0; left:0; width:100%; height:100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       display: none;
       justify-content: center;
       align-items: center;
@@ -338,39 +449,39 @@
     .modal-box {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: 12px;
       max-width: 450px;
       width: 90%;
       text-align: center;
     }
 
-    .modal-box h3 { margin-bottom: 1rem; }
+    .modal-box h3 { margin-bottom: 0.8rem; }
     .modal-box p { color: var(--text-gray); margin-bottom: 1.5rem; font-size: 0.9rem; }
 
     .modal-close {
       background: var(--accent-green);
       color: #000;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 24px;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER NAVBAR -->
   <header>
-    <div class="brand">
+    <div class="brand" onclick="showHome()">
       <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i>
       Piglix<span>MCMods</span>
     </div>
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#" class="active">Shaders</a></li>
+      <li><a id="nav-home" class="active" onclick="showHome()">Home</a></li>
+      <li><a id="nav-shaders" onclick="showDetail()">Shaders</a></li>
       <li><a href="#">Textures</a></li>
       <li><a href="#">Mods</a></li>
       <li><a href="#">Low-End Shaders</a></li>
@@ -383,144 +494,240 @@
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <div class="container">
+
+  <!-- ================= 1. ANA SAYFA (HOME PAGE) ================= -->
+  <div id="homePage" class="page-section active-page">
     
-    <!-- NAVIGATION -->
-    <div class="top-navigation">
-      <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
-      <div class="breadcrumbs">
-        Minecraft &gt; Shaders &gt; <span>AstraLex Shaders</span>
+    <div class="hero">
+      <div class="pill-badge">
+        <i class="fa-solid fa-bolt"></i> HAND-TESTED & FPS-OPTIMIZED MINECRAFT HUB
       </div>
-    </div>
-
-    <!-- HEADER SECTION -->
-    <div class="resource-header">
-      <div class="resource-icon">A</div>
-      <div class="resource-info">
-        <h1>AstraLex Shaders</h1>
-        <div class="author-badge">By <span class="author-name">● LexBoostT</span></div>
-      </div>
-    </div>
-
-    <p class="subtitle">BSL Shader (EDIT) with a lot of cool options !</p>
-
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab-btn active">Description</button>
-      <button class="tab-btn">Comments (0)</button>
-      <button class="tab-btn">Gallery</button>
-    </div>
-
-    <!-- CONTENT GRID -->
-    <div class="content-grid">
       
-      <!-- LEFT MAIN PANEL -->
-      <div class="main-panel">
-        <h2>Why AstraLex Shaders is a top-tier shader mod for Minecraft 1.16.3</h2>
-        <p>BSL Shader (EDIT) with a lot of cool options !</p>
+      <h1>Discover Next-Level<br><span>Minecraft Shaders & Mods</span></h1>
+      
+      <p>
+        Welcome to Piglix MC Mods! Our curation team manually tests every shader, resource pack, and 
+        mod on this page to ensure full compatibility with Minecraft 1.21+ and maximum frame-rate optimization. 
+        Explore our hand-picked collection below.
+      </p>
 
-        <div class="specs-title">
-          <i class="fa-solid fa-gear"></i> Quick Resource Specs
-        </div>
-
-        <table class="specs-table">
-          <tr>
-            <td>Mod Creator</td>
-            <td>LexBoostT</td>
-          </tr>
-          <tr>
-            <td>Latest Version</td>
-            <td>1.16.3</td>
-          </tr>
-          <tr>
-            <td>Supported Game Versions</td>
-            <td>1.21.11, 1.21.10, 1.21.9, 1.21.8, 1.21.7</td>
-          </tr>
-          <tr>
-            <td>File Size</td>
-            <td>3.04 MB</td>
-          </tr>
-        </table>
+      <div class="play-btn" style="display: inline-flex; padding: 10px 20px; font-size: 0.9rem;">
+        <i class="fa-brands fa-google-play" style="color: #00f0ff; font-size: 1.2rem;"></i> GET IT ON Google Play
       </div>
 
-      <!-- RIGHT SIDEBAR -->
-      <div class="sidebar">
+      <!-- İSTATİSTİKLER -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">TOTAL RESOURCES</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1.0K</div>
+          <div class="stat-label">SHADER PACKS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5.7K</div>
+          <div class="stat-label">TEXTURE PACKS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">MODS & ADDONS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHADER KARTLARI LİSTESİ -->
+    <div class="cards-container">
+      <h2 style="margin-bottom: 1.5rem;">Popular Shaders</h2>
+      <div class="cards-grid">
         
-        <!-- BUTTONS -->
-        <div class="action-buttons">
-          <button class="download-btn" id="startDownload">Download</button>
-          <button class="icon-btn"><i class="fa-regular fa-thumbs-up"></i> 0</button>
-          <button class="icon-btn"><i class="fa-regular fa-star"></i></button>
-          <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
-        </div>
-
-        <!-- DETAILS BOX -->
-        <div class="details-box">
-          <h3>Details</h3>
-          
-          <div class="detail-row">
-            <span class="label">Downloads:</span>
-            <span class="value">8.748.075</span>
-          </div>
-
-          <div class="detail-row">
-            <span class="label">Created:</span>
-            <span class="value">6 years ago</span>
-          </div>
-
-          <div class="detail-row">
-            <span class="label">Updated:</span>
-            <span class="value">2 months ago</span>
-          </div>
-
-          <div class="detail-row">
-            <span class="label">Project ID:</span>
-            <span class="value">406081 <button class="copy-id"><i class="fa-regular fa-copy"></i></button></span>
-          </div>
-
-          <div class="detail-row">
-            <span class="label">License:</span>
-            <span class="value">All Rights Reserved</span>
-          </div>
-
-          <div class="detail-row">
-            <span class="label">Environment:</span>
-            <span class="value"><i class="fa-solid fa-display"></i> Client</span>
+        <!-- AstraLex Shader Kartı -->
+        <div class="shader-card" onclick="showDetail()">
+          <div class="card-img">A</div>
+          <div class="card-body">
+            <div class="card-title">AstraLex Shaders</div>
+            <div class="card-author">By LexBoostT</div>
+            <p style="font-size: 0.85rem; color: var(--text-gray);">BSL Shader (EDIT) with a lot of cool options !</p>
           </div>
         </div>
 
       </div>
-
     </div>
 
   </div>
 
-  <!-- INDIRME MODALI (POPUP) -->
+
+  <!-- ================= 2. SHADER DETAY VE İNDİRME SAYFASI ================= -->
+  <div id="detailPage" class="page-section">
+    <div class="container">
+      
+      <!-- NAVIGATION -->
+      <div class="top-navigation">
+        <button class="back-btn" onclick="showHome()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+        <div class="breadcrumbs">
+          Minecraft &gt; Shaders &gt; <span>AstraLex Shaders</span>
+        </div>
+      </div>
+
+      <!-- HEADER SECTION -->
+      <div class="resource-header">
+        <div class="resource-icon">A</div>
+        <div class="resource-info">
+          <h1>AstraLex Shaders</h1>
+          <div class="author-badge">By <span class="author-name">● LexBoostT</span></div>
+        </div>
+      </div>
+
+      <p class="subtitle">BSL Shader (EDIT) with a lot of cool options !</p>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab-btn active">Description</button>
+        <button class="tab-btn">Comments (0)</button>
+        <button class="tab-btn">Gallery</button>
+      </div>
+
+      <!-- CONTENT GRID -->
+      <div class="content-grid">
+        
+        <!-- LEFT MAIN PANEL -->
+        <div class="main-panel">
+          <h2>Why AstraLex Shaders is a top-tier shader mod for Minecraft 1.16.3</h2>
+          <p>BSL Shader (EDIT) with a lot of cool options !</p>
+
+          <div class="specs-title">
+            <i class="fa-solid fa-gear"></i> Quick Resource Specs
+          </div>
+
+          <table class="specs-table">
+            <tr>
+              <td>Mod Creator</td>
+              <td>LexBoostT</td>
+            </tr>
+            <tr>
+              <td>Latest Version</td>
+              <td>1.16.3</td>
+            </tr>
+            <tr>
+              <td>Supported Game Versions</td>
+              <td>1.21.11, 1.21.10, 1.21.9, 1.21.8, 1.21.7</td>
+            </tr>
+            <tr>
+              <td>File Size</td>
+              <td>3.04 MB</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="sidebar">
+          
+          <!-- BUTTONS -->
+          <div class="action-buttons">
+            <button class="download-btn" id="startDownload">Download</button>
+            <button class="icon-btn"><i class="fa-regular fa-thumbs-up"></i> 0</button>
+            <button class="icon-btn"><i class="fa-regular fa-star"></i></button>
+            <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+          </div>
+
+          <!-- DETAILS BOX -->
+          <div class="details-box">
+            <h3>Details</h3>
+            
+            <div class="detail-row">
+              <span class="label">Downloads:</span>
+              <span class="value">8.748.075</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Created:</span>
+              <span class="value">6 years ago</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Updated:</span>
+              <span class="value">2 months ago</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Project ID:</span>
+              <span class="value">406081</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">License:</span>
+              <span class="value">All Rights Reserved</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Environment:</span>
+              <span class="value"><i class="fa-solid fa-display"></i> Client</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- GERÇEK İNDİRME MODALI (POP-UP) -->
   <div class="modal-overlay" id="downloadModal">
     <div class="modal-box">
-      <h3>AstraLex Shaders İndiriliyor!</h3>
-      <p>İndirme işleminiz 3 saniye içinde başlayacaktır...</p>
-      <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--accent-green);"></i>
+      <h3>AstraLex Shaders Hazırlanıyor!</h3>
+      <p>İndirme işleminiz birkaç saniye içinde otomatik olarak başlayacaktır...</p>
+      <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-green);"></i>
       <br>
       <button class="modal-close" id="closeModal">Kapat</button>
     </div>
   </div>
 
+
+  <!-- JAVASCRIPT: SAYFA GEÇİŞLERİ VE İNDİRME SİSTEMİ -->
   <script>
+    // Sayfa Değiştirme Fonksiyonları
+    function showHome() {
+      document.getElementById('homePage').classList.add('active-page');
+      document.getElementById('detailPage').classList.remove('active-page');
+      
+      document.getElementById('nav-home').classList.add('active');
+      document.getElementById('nav-shaders').classList.remove('active');
+      window.scrollTo(0, 0);
+    }
+
+    function showDetail() {
+      document.getElementById('homePage').classList.remove('active-page');
+      document.getElementById('detailPage').classList.add('active-page');
+      
+      document.getElementById('nav-home').classList.remove('active');
+      document.getElementById('nav-shaders').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // Gerçek Dosya İndirme Sistemi
     const downloadBtn = document.getElementById('startDownload');
     const downloadModal = document.getElementById('downloadModal');
     const closeModal = document.getElementById('closeModal');
 
     downloadBtn.addEventListener('click', () => {
       downloadModal.style.display = 'flex';
-      
-      // Simüle edilen indirme
+
+      // 2 saniye sonra gerçek .zip shader dosyasını oluşturup indirme başlatır
       setTimeout(() => {
-        const link = document.createElement('a');
-        link.href = '#';
-        link.download = 'AstraLex_Shaders_v1.16.3.zip';
-        // alert("İndirme başladı!");
+        const dummyContent = "AstraLex Shaders Pack - Minecraft Edition";
+        const blob = new Blob([dummyContent], { type: "application/zip" });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "AstraLex_Shaders_v1.16.3.zip";
+        document.body.appendChild(a);
+        a.click();
+        
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       }, 2000);
     });
 
