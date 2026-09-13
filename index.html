@@ -3,363 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShadersForMCPE - Premium Minecraft Mods</title>
+  <title>PiglixMCMods - Minecraft Shaders & Mods</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     :root {
-      --bg-main: #030712;
-      --bg-card: rgba(17, 24, 39, 0.7);
-      --bg-panel: #0f172a;
-      --accent-blue: #3b82f6;
-      --accent-blue-hover: #2563eb;
-      --accent-cyan: #06b6d4;
-      --border-light: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      
-      /* Badge Colors */
-      --badge-bedrock: #10b981;
-      --badge-java: #f59e0b;
-      --badge-shader: #8b5cf6;
-      --badge-texture: #ec4899;
+      --bg-dark: #080b11;
+      --card-bg: #0d121c;
+      --card-border: #1a2332;
+      --accent-green: #22c55e;
+      --accent-green-bg: rgba(34, 197, 94, 0.1);
+      --text-main: #ffffff;
+      --text-muted: #8e9bb0;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      overflow-x: hidden;
-    }
-
-    /* ================= HEADER ================= */
+    /* HEADER */
     header {
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-light);
-      padding: 1rem 5%;
+      background-color: rgba(8, 11, 17, 0.95);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.8rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      position: sticky; top: 0; z-index: 1000;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: #fff;
-      cursor: pointer;
-      letter-spacing: -0.5px;
-    }
-    .brand span { color: var(--accent-blue); }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.3rem; color: #fff; cursor: pointer; }
+    .brand span { color: var(--accent-green); }
 
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      list-style: none;
+    .nav-links { display: flex; gap: 20px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    .play-btn {
+      background: #000; border: 1px solid #333; padding: 6px 12px; border-radius: 6px;
+      color: #fff; display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer;
     }
 
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-blue);
-    }
-
-    /* ================= SAYFA DÜZENİ ================= */
-    .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
-    .page-section.active-page { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ================= HERO SECTION ================= */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 6rem 2rem 4rem 2rem;
-      background: linear-gradient(180deg, rgba(3, 7, 18, 0.6) 0%, rgba(3, 7, 18, 1) 100%),
-                  url('https://images.alphacoders.com/133/1331828.png') center/cover no-repeat;
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .pill-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      color: var(--accent-blue);
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      letter-spacing: -1px;
-    }
-    .hero h1 span {
-      background: linear-gradient(to right, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
-      line-height: 1.6;
-    }
-
-    /* ================= FILTER & SORT BAR ================= */
-    .controls-bar {
-      max-width: 1200px;
+    /* MAIN CONTAINER */
+    .main-layout {
+      max-width: 1400px;
       margin: 2rem auto;
       padding: 0 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .filters {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-light);
-      color: var(--text-muted);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-    }
-
-    .filter-btn.active {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-      color: #fff;
-    }
-
-    .sort-box select {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-light);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      outline: none;
-      appearance: none;
-      min-width: 180px;
-    }
-
-    /* ================= SHADER CARDS ================= */
-    .cards-container {
-      max-width: 1200px;
-      margin: 0 auto 4rem auto;
-      padding: 0 1.5rem;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .shader-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .shader-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
-    }
-
-    .card-img {
-      width: 100%;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      font-weight: 800;
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    /* Renk Varyasyonları (Baş Harfler İçin) */
-    .bg-gradient-1 { background: linear-gradient(135deg, #1e3a8a, #3b82f6); }
-    .bg-gradient-2 { background: linear-gradient(135deg, #064e3b, #10b981); }
-    .bg-gradient-3 { background: linear-gradient(135deg, #701a75, #d946ef); }
-    .bg-gradient-4 { background: linear-gradient(135deg, #7f1d1d, #ef4444); }
-    .bg-gradient-5 { background: linear-gradient(135deg, #4c1d95, #8b5cf6); }
-
-    .card-body {
-      padding: 1.2rem;
-    }
-
-    .card-tags {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .tag.bedrock { background: rgba(16, 185, 129, 0.15); color: var(--badge-bedrock); }
-    .tag.java { background: rgba(245, 158, 11, 0.15); color: var(--badge-java); }
-    .tag.shader { background: rgba(139, 92, 246, 0.15); color: var(--badge-shader); }
-    .tag.texture { background: rgba(236, 72, 153, 0.15); color: var(--badge-texture); }
-
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #fff;
-    }
-
-    .card-author {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    /* ================= SHADER DETAY SAYFASI ================= */
-    .detail-container {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 0 1.5rem;
-    }
-
-    .back-btn {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-light);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 2rem;
-      transition: all 0.2s;
-    }
-    .back-btn:hover { background: var(--accent-blue); border-color: var(--accent-blue); }
-
-    .detail-header {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 2rem;
-    }
-
-    .detail-icon {
-      width: 90px;
-      height: 90px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      font-weight: 800;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    .detail-title h1 { font-size: 2.5rem; margin-bottom: 8px; }
-    
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 240px 1fr;
       gap: 2rem;
     }
 
-    .panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      padding: 2rem;
-      backdrop-filter: blur(10px);
+    /* SIDEBAR (PIGLIX STYLE) */
+    .sidebar-section { margin-bottom: 2rem; }
+    .sidebar-title {
+      font-size: 0.75rem; font-weight: 800; color: var(--text-muted);
+      letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase;
     }
 
-    .download-btn {
-      width: 100%;
-      background: var(--accent-blue);
-      color: #fff;
-      border: none;
-      padding: 16px;
+    .version-list { display: flex; flex-direction: column; gap: 8px; }
+    .version-item {
+      color: var(--text-muted); font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; padding: 4px 0; transition: color 0.2s;
+    }
+    .version-item:hover, .version-item.active { color: var(--accent-green); }
+
+    .sort-select {
+      width: 100%; background: #0d121c; border: 1px solid var(--card-border);
+      color: #fff; padding: 10px 12px; border-radius: 8px; font-weight: 600;
+      font-size: 0.85rem; outline: none; cursor: pointer;
+    }
+
+    /* CARDS GRID */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      font-weight: 700;
-      font-size: 1.1rem;
+      overflow: hidden;
       cursor: pointer;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      transition: background 0.2s;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .download-btn:hover { background: var(--accent-blue-hover); }
+    .card:hover { border-color: var(--accent-green); transform: translateY(-3px); }
 
-    /* İndirme Modalı */
-    .modal-overlay {
-      position: fixed; top:0; left:0; width:100%; height:100%;
-      background: rgba(0,0,0,0.9);
-      display: none; justify-content: center; align-items: center; z-index: 2000;
+    .card-banner {
+      width: 100%; height: 110px; background-size: cover; background-position: center;
+      position: relative;
     }
-    .modal-box {
-      background: var(--bg-panel); border: 1px solid var(--border-light);
-      padding: 3rem; border-radius: 20px; text-align: center; max-width: 400px;
+
+    .card-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: var(--accent-green); color: #000;
+      font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .card-content { padding: 1rem; }
+    .card-title { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+    .card-desc { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+
+    .card-feature {
+      background: var(--accent-green-bg); border: 1px solid rgba(34, 197, 94, 0.2);
+      color: #4ade80; font-size: 0.7rem; padding: 6px 8px; border-radius: 6px; margin-bottom: 12px; line-height: 1.3;
+    }
+
+    .card-footer {
+      display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;
+    }
+    .card-footer span strong { color: #fff; }
+
+    /* SHOUT-OUTS SECTION */
+    .shoutout-wrapper {
+      max-width: 1400px; margin: 4rem auto 2rem auto; padding: 0 1.5rem;
+    }
+    
+    .shoutout-card {
+      background: #0b0f19; border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 3rem; display: grid; grid-template-columns: 1fr 380px; gap: 3rem;
+      position: relative; overflow: hidden;
+    }
+
+    .shoutout-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-green-bg); border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--accent-green); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+
+    .shoutout-title { font-size: 2.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+    .shoutout-title span { color: var(--accent-green); }
+
+    .shoutout-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6; }
+
+    .yt-btn {
+      background: #ff0000; color: #fff; border: none; padding: 12px 20px; border-radius: 8px;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; margin-bottom: 2.5rem;
+    }
+
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .stat-box h3 { font-size: 1.4rem; font-weight: 800; color: #fff; }
+    .stat-box p { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 4px; }
+
+    /* COMMENTS BOARD (WOODEN PANELS) */
+    .comments-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;
+    }
+
+    .wood-comment {
+      background: #121824; border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem;
+      position: relative;
+    }
+
+    .wood-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .user-info { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; }
+    .user-avatar { width: 24px; height: 24px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+    .pinned-badge { background: #ff0000; color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
+    .wood-sign {
+      background: #5c3a21; border: 2px solid #3d2312; color: #fce7f3; padding: 10px; border-radius: 6px;
+      font-size: 0.75rem; line-height: 1.3; font-weight: 600; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .wood-footer { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; }
+
+    /* FOOTER (PIGLIX EXACT) */
+    footer {
+      background: #05070c; border-top: 1px solid var(--card-border); padding: 4rem 2rem 2rem 2rem; margin-top: 4rem;
+    }
+
+    .footer-app-banner {
+      max-width: 1350px; margin: 0 auto 3rem auto; background: #0c111a; border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .footer-grid {
+      max-width: 1350px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 2rem;
+      padding-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-col h4 { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 1.2rem; text-transform: uppercase; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: #cbd5e1; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--accent-green); }
+
+    .footer-bottom {
+      max-width: 1350px; margin: 2rem auto 0 auto; display: flex; justify-content: space-between;
+      color: var(--text-muted); font-size: 0.8rem;
     }
   </style>
 </head>
@@ -367,233 +205,318 @@
 
   <!-- HEADER -->
   <header>
-    <div class="brand" onclick="showHome()">
-      <i class="fa-solid fa-cube" style="color: var(--accent-blue);"></i>
-      ShadersFor<span>MCPE</span>
+    <div class="brand">
+      <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i>
+      Piglix<span>MCMods</span>
     </div>
     <ul class="nav-links">
-      <li><a class="active" onclick="showHome()">Home</a></li>
+      <li><a class="active">Home</a></li>
       <li><a>Shaders</a></li>
-      <li><a>Texture Packs</a></li>
+      <li><a>Textures</a></li>
       <li><a>Mods</a></li>
+      <li><a>Low-End Shaders</a></li>
+      <li><a>RTX Shaders</a></li>
+      <li><a>Shout-Outs</a></li>
+      <li><a>Saved</a></li>
     </ul>
+    <div class="play-btn">
+      <i class="fa-brands fa-google-play" style="color: #00f0ff;"></i> GET IT ON Google Play
+    </div>
   </header>
 
-
-  <!-- 1. ANA SAYFA -->
-  <div id="homePage" class="page-section active-page">
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
     
-    <!-- Hero -->
-    <div class="hero">
-      <div class="pill-badge">
-        <i class="fa-solid fa-bolt"></i> NEXT-GEN BEDROCK & JAVA HUB
+    <!-- LEFT SIDEBAR -->
+    <aside>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Minecraft Version</div>
+        <div class="version-list">
+          <div class="version-item active">1.21</div>
+          <div class="version-item">1.20</div>
+          <div class="version-item">1.19</div>
+          <div class="version-item">1.18</div>
+          <div class="version-item">1.17</div>
+          <div class="version-item">1.16</div>
+        </div>
       </div>
-      <h1>Elevate Your<br><span>Minecraft Experience</span></h1>
-      <p>Discover the most stunning shaders and texture packs. Hand-tested for optimal FPS, beautiful lighting, and perfect compatibility.</p>
-    </div>
 
-    <!-- Filters & Sort -->
-    <div class="controls-bar">
-      <div class="filters">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Bedrock</button>
-        <button class="filter-btn">Java</button>
-        <button class="filter-btn">Shaders</button>
-        <button class="filter-btn">Textures</button>
-      </div>
-      <div class="sort-box">
-        <select>
-          <option>Trending Now</option>
-          <option>Most Downloaded</option>
-          <option>Newest Added</option>
-          <option>Highest Rated</option>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Sort By</div>
+        <select class="sort-select">
+          <option>🔥 Most Downloaded</option>
+          <option>⭐ Top Rated</option>
+          <option>🆕 Newest</option>
         </select>
       </div>
-    </div>
+    </aside>
 
-    <!-- Cards Grid -->
-    <div class="cards-container">
+    <!-- SHADERS GRID -->
+    <main class="cards-grid">
       
-      <!-- Card 1: Newb X Dragon (Bedrock Özel) -->
-      <div class="shader-card" onclick="showDetail('Newb X Dragon', 'N', 'bg-gradient-2', 'Bedrock', 'Shader')">
-        <div class="card-img bg-gradient-2">N</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag bedrock">Bedrock</span> <span class="tag shader">Shader</span></div>
-          <div class="card-title">Newb X Dragon</div>
-          <div class="card-author">By DevX</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">A beautifully optimized vanilla-style shader for MCPE Render Dragon.</p>
-        </div>
-      </div>
-
-      <!-- Card 2: Azify Smootea (Bedrock Özel) -->
-      <div class="shader-card" onclick="showDetail('Azify Smootea', 'A', 'bg-gradient-3', 'Bedrock', 'Texture')">
-        <div class="card-img bg-gradient-3">A</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag bedrock">Bedrock</span> <span class="tag texture">Texture Pack</span></div>
-          <div class="card-title">Azify Smootea</div>
-          <div class="card-author">By AzifyTeam</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Smooth, clean, and PvP focused UI & Textures for mobile players.</p>
-        </div>
-      </div>
-
-      <!-- Card 3: AstraLex -->
-      <div class="shader-card" onclick="showDetail('AstraLex Shaders', 'A', 'bg-gradient-1', 'Java', 'Shader')">
-        <div class="card-img bg-gradient-1">A</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag java">Java</span> <span class="tag shader">Shader</span></div>
-          <div class="card-title">AstraLex Shaders</div>
-          <div class="card-author">By LexBoostT</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">BSL Shader (EDIT) with a lot of cool options and cinematic effects!</p>
-        </div>
-      </div>
-
-      <!-- Card 4: BSL -->
-      <div class="shader-card" onclick="showDetail('BSL Shaders', 'B', 'bg-gradient-4', 'Java', 'Shader')">
-        <div class="card-img bg-gradient-4">B</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag java">Java</span> <span class="tag shader">Shader</span></div>
-          <div class="card-title">BSL Shaders</div>
-          <div class="card-author">By CaptTatsu</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">High performance and highly customizable vanilla aesthetics.</p>
-        </div>
-      </div>
-
-      <!-- Card 5: Complementary -->
-      <div class="shader-card" onclick="showDetail('Complementary Reimagined', 'C', 'bg-gradient-5', 'Java', 'Shader')">
-        <div class="card-img bg-gradient-5">C</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag java">Java</span> <span class="tag shader">Shader</span></div>
-          <div class="card-title">Complementary</div>
-          <div class="card-author">By EminGT</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Aims to be perfect at everything. Incredible clouds and water.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- 2. DETAY SAYFASI -->
-  <div id="detailPage" class="page-section">
-    <div class="detail-container">
-      
-      <button class="back-btn" onclick="showHome()"><i class="fa-solid fa-arrow-left"></i> Back to Hub</button>
-
-      <!-- Dinamik İçerik Alanı -->
-      <div class="detail-header">
-        <div class="detail-icon" id="detailIcon">X</div>
-        <div class="detail-title">
-          <div class="card-tags" id="detailTags"></div>
-          <h1 id="detailName">Shader Name</h1>
-          <p style="color: var(--text-muted);">Status: <span style="color: #10b981;">Verified & Working</span></p>
-        </div>
-      </div>
-
-      <div class="detail-grid">
-        <div class="panel">
-          <h2 style="margin-bottom: 1rem;">Overview</h2>
-          <p style="color: var(--text-muted); line-height: 1.7;">This resource pack/shader is fully compatible with the latest game versions. It improves lighting, sky rendering, and block textures to give you the most immersive Minecraft experience possible. Specially optimized for smooth frame rates.</p>
-        </div>
-        
-        <div class="panel">
-          <button class="download-btn" id="startDownload"><i class="fa-solid fa-download"></i> Download .ZIP</button>
-          <div style="font-size: 0.9rem; color: var(--text-muted);">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-              <span>File Size:</span> <span style="color:#fff;">~4.5 MB</span>
-            </div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-              <span>Version:</span> <span style="color:#fff;">Latest</span>
-            </div>
+      <!-- Photon -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');"></div>
+        <div class="card-content">
+          <div class="card-title">Photon Shader</div>
+          <div class="card-desc">A gameplay-focused shader pack with a semi-realistic style.</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+          <div class="card-footer">
+            <span>Version: <strong>1.17.1</strong></span>
+            <span><strong>6,333,551</strong> downloads</span>
           </div>
         </div>
       </div>
 
+      <!-- Sildur's -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');"></div>
+        <div class="card-content">
+          <div class="card-title">Sildur's Enhanced Default Shaders</div>
+          <div class="card-desc">Improves the look of vanilla MC with shadows, reflections and...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+          <div class="card-footer">
+            <span>Version: <strong>1.17.1</strong></span>
+            <span><strong>6,099,650</strong> downloads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miniature -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');"></div>
+        <div class="card-content">
+          <div class="card-title">Miniature Shader</div>
+          <div class="card-desc">Extremely lightweight with shadows and reflections.</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+          <div class="card-footer">
+            <span>Version: <strong>1.16.3</strong></span>
+            <span><strong>3,600,707</strong> downloads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Luminous Dreams -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');"></div>
+        <div class="card-content">
+          <div class="card-title">Luminous Dreams v1.0 [RELEASE]</div>
+          <div class="card-desc">Luminous Dreams is a Deferred Rendering pack for Minecraft...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+          <div class="card-footer">
+            <span>Version: <strong>1.21.130</strong></span>
+            <span><strong>3,380,743</strong> downloads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BSL -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');"></div>
+        <div class="card-content">
+          <div class="card-title">BSL Shaders - Classic</div>
+          <div class="card-desc">[DISCONTINUED] Shaderpack for Minecraft: Java Edition. It's...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+          <div class="card-footer">
+            <span>Version: <strong>1.17.1</strong></span>
+            <span><strong>2,883,670</strong> downloads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RedHat -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');">
+          <span class="card-badge">SHADERS</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title">RedHat Shaders v34.3</div>
+          <div class="card-desc">An edit of Chocapic13 focusing on semi realism/fantasy...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+        </div>
+      </div>
+
+      <!-- Newb Complementary -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');">
+          <span class="card-badge">SHADERS</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title">Newb Complementary...</div>
+          <div class="card-desc">A new update to Newb Complementary has arrived. no...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+        </div>
+      </div>
+
+      <!-- Voyager -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');">
+          <span class="card-badge">SHADERS</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title">Voyager shader 2.0</div>
+          <div class="card-desc">A shader that add realism for Minecraft with a good look.</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+        </div>
+      </div>
+
+      <!-- Revolution -->
+      <div class="card">
+        <div class="card-banner" style="background-image: url('https://images.alphacoders.com/133/1331828.png');">
+          <span class="card-badge">SHADERS</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title">Revolution Vibrant Visuals | Static...</div>
+          <div class="card-desc">As its name says, this aims to revolutionize the graphics of...</div>
+          <div class="card-feature">Stunning volumetric lighting effects, recommended for medium to high-end PCs.</div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- SHOUT-OUTS SECTION -->
+  <div class="shoutout-wrapper">
+    <div class="shoutout-card">
+      <div>
+        <div class="shoutout-badge"><i class="fa-solid fa-star"></i> SUBSCRIBER SHOUTOUT BOARD</div>
+        <div class="shoutout-title">Community <span>Shout-Outs</span> & Best <span>Comments</span></div>
+        <p class="shoutout-desc">Every week we showcase the top Minecraft PE shader reviews, FPS benchmarks, and epic comments from our YouTube channel.</p>
+        
+        <a class="yt-btn" href="https://youtube.com" target="_blank">
+          <i class="fa-brands fa-youtube"></i> Visit @realpiglix YouTube Channel
+        </a>
+
+        <div class="stats-row">
+          <div class="stat-box"><h3>50+</h3><p>FEATURED COMMENTS</p></div>
+          <div class="stat-box"><h3>15K+</h3><p>YOUTUBE SUBSCRIBERS</p></div>
+          <div class="stat-box"><h3>12,500+</h3><p>COMMUNITY LIKES</p></div>
+          <div class="stat-box"><h3>Weekly</h3><p>SHOUTOUT UPDATES</p></div>
+        </div>
+      </div>
+
+      <!-- CHARACTER PREVIEW -->
+      <div style="background: linear-gradient(180deg, rgba(34,197,94,0.1), transparent); border-radius: 12px; display: flex; align-items: center; justify-content: center; position: relative;">
+        <i class="fa-solid fa-gamepad fa-5x" style="color: var(--accent-green); opacity: 0.5;"></i>
+      </div>
+    </div>
+
+    <!-- COMMENTS WOODEN BOARDS -->
+    <div class="comments-grid">
+      
+      <div class="wood-comment">
+        <div class="wood-header">
+          <div class="user-info"><div class="user-avatar">V</div> VoxelKnightMC <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <span class="pinned-badge">📌 Pinned</span>
+        </div>
+        <div class="wood-sign">"The way you explain how to bypass the Render Dragon limitations on Bedrock is way clearer than..."</div>
+        <div class="wood-footer"><span>👍 512</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+      </div>
+
+      <div class="wood-comment">
+        <div class="wood-header">
+          <div class="user-info"><div class="user-avatar" style="background:#ec4899;">P</div> PixelQueen_99 <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <span class="pinned-badge">📌 Pinned</span>
+        </div>
+        <div class="wood-sign">"That RTX Medieval 32x pack you showcased at 04:15 made my survival castle look like a AAA Unre..."</div>
+        <div class="wood-footer"><span>👍 389</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+      </div>
+
+      <div class="wood-comment">
+        <div class="wood-header">
+          <div class="user-info"><div class="user-avatar" style="background:#10b981;">R</div> RedstoneWizard_Z <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <span class="pinned-badge">📌 Pinned</span>
+        </div>
+        <div class="wood-sign">"Idea: Can you test the new Create Mod Bedrock port with chunk pre-loader addons to see if automation..."</div>
+        <div class="wood-footer"><span>👍 275</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+      </div>
+
+      <div class="wood-comment">
+        <div class="wood-header">
+          <div class="user-info"><div class="user-avatar" style="background:#8b5cf6;">C</div> CreeperWhisperer <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i></div>
+          <span class="pinned-badge">📌 Pinned</span>
+        </div>
+        <div class="wood-sign">"I turned on the fog shader you showed in the video at 2 AM, walked into a dark cave, heard a warden..."</div>
+        <div class="wood-footer"><span>👍 620</span> <span style="color: #ef4444;">♥ Piglix Hearted</span></div>
+      </div>
+
     </div>
   </div>
 
-  <!-- İNDİRME MODALI -->
-  <div class="modal-overlay" id="downloadModal">
-    <div class="modal-box">
-      <h3 style="margin-bottom: 15px; font-size:1.5rem;">Preparing Download...</h3>
-      <p style="color: var(--text-muted); margin-bottom: 25px;">Your file will start downloading automatically.</p>
-      <i class="fa-solid fa-circle-notch fa-spin fa-3x" style="color: var(--accent-blue);"></i>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-app-banner">
+      <div>
+        <div style="color: var(--accent-green); font-size: 0.75rem; font-weight: 800; margin-bottom: 4px;">OFFICIAL MOBILE APP</div>
+        <h3 style="font-size: 1.2rem; color: #fff;">Get the Android App — Free on Play Store</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Download hand-tested shaders, texture packs & mods directly to your Android device with 1-click install links.</p>
+      </div>
+      <div class="play-btn" style="padding: 10px 20px; font-size: 0.9rem;">
+        <i class="fa-brands fa-google-play" style="color: #00f0ff; font-size: 1.2rem;"></i> GET IT ON Google Play
+      </div>
     </div>
-  </div>
 
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 1rem;">
+          <i class="fa-solid fa-cube" style="color: var(--accent-green);"></i> Piglix<span>MCMods</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem;">Curated Minecraft resource discovery with a dark, crafted interface for fans and creators.</p>
+        <span style="background: #111827; border: 1px solid var(--card-border); color: var(--accent-green); font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700;">Independent Minecraft fan hub</span>
+      </div>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    // Filtre butonları efekti
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">YouTube Shout-Outs</a></li>
+          <li><a href="#">Saved Library</a></li>
+          <li><a href="#">Guides & installation</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Sponsor & Partner</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
 
-    let currentShaderName = "Mod";
+      <div class="footer-col">
+        <h4>PERFORMANCE HUB</h4>
+        <ul>
+          <li><a href="#">Best Low-End Shaders</a></li>
+          <li><a href="#">MCPE Performance Mods</a></li>
+          <h4 style="margin-top: 1.5rem;">REALISM & RTX</h4>
+          <li><a href="#">Realistic RTX Shaders</a></li>
+          <li><a href="#">RTX Texture Packs for MCPE</a></li>
+        </ul>
+      </div>
 
-    // Ana Sayfaya Dön
-    function showHome() {
-      document.getElementById('homePage').classList.add('active-page');
-      document.getElementById('detailPage').classList.remove('active-page');
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
+      <div class="footer-col">
+        <h4>PLATFORM COMPATIBILITY</h4>
+        <ul>
+          <li><a href="#">Minecraft PE Shaders 1.21</a></li>
+          <li><a href="#">Shaders for Android & iOS</a></li>
+          <h4 style="margin-top: 1.5rem;">GAMEPLAY VIBE</h4>
+          <li><a href="#">Top PvP Texture Packs</a></li>
+          <li><a href="#">Medieval Texture Packs</a></li>
+        </ul>
+      </div>
 
-    // Detay Sayfasını Aç ve İçeriği Dinamik Değiştir
-    function showDetail(name, letter, bgClass, platform, type) {
-      currentShaderName = name; // İndirme ismi için kaydet
-      
-      // Detay Sayfasındaki Bilgileri Güncelle
-      document.getElementById('detailName').innerText = name;
-      
-      const icon = document.getElementById('detailIcon');
-      icon.innerText = letter;
-      icon.className = 'detail-icon ' + bgClass;
+      <div class="footer-col">
+        <h4>COMMUNITY & SOCIALS</h4>
+        <ul>
+          <li><a href="#" style="color: var(--accent-green);"><i class="fa-brands fa-google-play"></i> Get Android App</a></li>
+          <li><a href="#" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i> YouTube Channel</a></li>
+          <li><a href="#"><i class="fa-solid fa-bullhorn"></i> Community Shout-Outs</a></li>
+          <li><a href="#" style="color: #ec4899;"><i class="fa-brands fa-instagram"></i> Instagram Community</a></li>
+        </ul>
+      </div>
+    </div>
 
-      // Tagları ayarla
-      let platformClass = platform === 'Bedrock' ? 'bedrock' : 'java';
-      let typeClass = type === 'Shader' ? 'shader' : 'texture';
-      
-      document.getElementById('detailTags').innerHTML = `
-        <span class="tag ${platformClass}">${platform}</span>
-        <span class="tag ${typeClass}">${type}</span>
-      `;
-
-      // Sayfa Geçişi
-      document.getElementById('homePage').classList.remove('active-page');
-      document.getElementById('detailPage').classList.add('active-page');
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-
-    // İndirme Sistemi
-    const downloadBtn = document.getElementById('startDownload');
-    const downloadModal = document.getElementById('downloadModal');
-
-    downloadBtn.addEventListener('click', () => {
-      downloadModal.style.display = 'flex';
-
-      setTimeout(() => {
-        // Gerçek bir ZIP dosyası indir
-        const dummyContent = "Content for " + currentShaderName;
-        const blob = new Blob([dummyContent], { type: "application/zip" });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement("a");
-        a.href = url;
-        // Dosya ismini temizle (boşlukları alt tire yap)
-        const safeName = currentShaderName.replace(/\s+/g, '_');
-        a.download = `${safeName}_v1.0.zip`;
-        document.body.appendChild(a);
-        a.click();
-        
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        downloadModal.style.display = 'none'; // Modalı kapat
-      }, 2500);
-    });
-  </script>
+    <div class="footer-bottom">
+      <div>© 2026 PiglixMCMods. All rights reserved.</div>
+      <div>Designed for Minecraft explorers, builders, and shader fans.</div>
+    </div>
+  </footer>
 
 </body>
 </html>
